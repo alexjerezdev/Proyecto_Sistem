@@ -23,7 +23,7 @@ Scrum, 2 sprints de 1 semana, con prácticas de XP (revisión de código, prueba
 
 - Backend + Frontend: a elección del equipo
 - Base de datos: PostgreSQL
-- Editor: Visual Studio Code
+- Editor:  Visual Studio Code
 
 ## Estructura del repositorio
 

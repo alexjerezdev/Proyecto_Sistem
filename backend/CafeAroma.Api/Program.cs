@@ -1,26 +1,66 @@
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 using CafeAroma.Api.Data;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using CafeAroma.Api.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Configuración limpia de la base de datos usando el tipo explícito de opciones
+// === TODO builder.Services.Add... va ANTES de Build() ===
+
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddOpenApi();
 
+builder.Services.AddControllers();
+
+builder.Services.AddScoped<TokenService>();
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidateAudience = false,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+            ValidIssuer = builder.Configuration["Jwt:Issuer"],
+            IssuerSigningKey = new SymmetricSecurityKey(
+                Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]!))
+        };
+    });
+
+builder.Services.AddAuthorization();
+
+// === Línea divisoria ===
 var app = builder.Build();
 
-// === PRUEBA DE CONEXIÓN RÁPIDA A POSTGRESQL (Segura contra errores de tipo) ===
+// === TODO app.Use... y app.Map... va DESPUÉS de Build() ===
+
+if (app.Environment.IsDevelopment())
+{
+    app.MapOpenApi();
+}
+
+app.UseHttpsRedirection();
+
+app.UseAuthentication();
+app.UseAuthorization();
+
+app.MapControllers();
+
+// === PRUEBA DE CONEXIÓN RÁPIDA A POSTGRESQL ===
 using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
     try
     {
-        var dbContext = ActivatorUtilities.CreateInstance<AppDbContext>(services);
+        var dbContext = services.GetRequiredService<AppDbContext>();
         var canConnect = dbContext.Database.CanConnect();
-        
+
         if (canConnect)
         {
             Console.WriteLine("--------------------------------------------------");
@@ -38,13 +78,6 @@ using (var scope = app.Services.CreateScope())
     }
 }
 // ===========================================================================
-
-if (app.Environment.IsDevelopment())
-{
-    app.MapOpenApi();
-}
-
-app.UseHttpsRedirection();
 
 var summaries = new[]
 {

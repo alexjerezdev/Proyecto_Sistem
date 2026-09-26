@@ -1,6 +1,12 @@
 @CafeAroma.Api_HostAddress = http://localhost:5127
 
-GET {{CafeAroma.Api_HostAddress}}/weatherforecast/
-Accept: application/json
 
+
+POST https://localhost:xxxx/api/auth/login
+Content-Type: application/json
+
+{
+  "nombre": "Don Mario",
+  "contrasena": "1234"
+}
 ###
