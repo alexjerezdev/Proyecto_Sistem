@@ -2135,11 +2135,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "c:\\Users\\Usuario\\Desktop\\Proyecto_Sistem\\Proyecto_Sistem\\backend\\CafeAroma.Tests\\CafeAroma.Tests.csproj",
+      "projectUniqueName": "C:\\Users\\Usuario\\Desktop\\Proyecto_Sistem\\Proyecto_Sistem\\backend\\CafeAroma.Tests\\CafeAroma.Tests.csproj",
       "projectName": "CafeAroma.Tests",
-      "projectPath": "c:\\Users\\Usuario\\Desktop\\Proyecto_Sistem\\Proyecto_Sistem\\backend\\CafeAroma.Tests\\CafeAroma.Tests.csproj",
+      "projectPath": "C:\\Users\\Usuario\\Desktop\\Proyecto_Sistem\\Proyecto_Sistem\\backend\\CafeAroma.Tests\\CafeAroma.Tests.csproj",
       "packagesPath": "C:\\Users\\Usuario\\.nuget\\packages\\",
-      "outputPath": "c:\\Users\\Usuario\\Desktop\\Proyecto_Sistem\\Proyecto_Sistem\\backend\\CafeAroma.Tests\\obj\\",
+      "outputPath": "C:\\Users\\Usuario\\Desktop\\Proyecto_Sistem\\Proyecto_Sistem\\backend\\CafeAroma.Tests\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Usuario\\AppData\\Roaming\\NuGet\\NuGet.Config"

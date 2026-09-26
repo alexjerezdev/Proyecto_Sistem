@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "+X1YOx751RM=",
+  "dgSpecHash": "WZGifZYV1Ek=",
   "success": true,
-  "projectFilePath": "c:\\Users\\Usuario\\Desktop\\Proyecto_Sistem\\Proyecto_Sistem\\backend\\CafeAroma.Tests\\CafeAroma.Tests.csproj",
+  "projectFilePath": "C:\\Users\\Usuario\\Desktop\\Proyecto_Sistem\\Proyecto_Sistem\\backend\\CafeAroma.Tests\\CafeAroma.Tests.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Usuario\\.nuget\\packages\\bcrypt.net-next\\4.2.0\\bcrypt.net-next.4.2.0.nupkg.sha512",
     "C:\\Users\\Usuario\\.nuget\\packages\\coverlet.collector\\6.0.4\\coverlet.collector.6.0.4.nupkg.sha512",
@@ -52,9 +52,9 @@
       "code": "NU1903",
       "level": "Warning",
       "message": "El paquete \"Microsoft.OpenApi\" 2.0.0 tiene una vulnerabilidad de gravedad alta conocida, https://github.com/advisories/GHSA-v5pm-xwqc-g5wc",
-      "projectPath": "c:\\Users\\Usuario\\Desktop\\Proyecto_Sistem\\Proyecto_Sistem\\backend\\CafeAroma.Tests\\CafeAroma.Tests.csproj",
+      "projectPath": "C:\\Users\\Usuario\\Desktop\\Proyecto_Sistem\\Proyecto_Sistem\\backend\\CafeAroma.Tests\\CafeAroma.Tests.csproj",
       "warningLevel": 1,
-      "filePath": "c:\\Users\\Usuario\\Desktop\\Proyecto_Sistem\\Proyecto_Sistem\\backend\\CafeAroma.Tests\\CafeAroma.Tests.csproj",
+      "filePath": "C:\\Users\\Usuario\\Desktop\\Proyecto_Sistem\\Proyecto_Sistem\\backend\\CafeAroma.Tests\\CafeAroma.Tests.csproj",
       "libraryId": "Microsoft.OpenApi",
       "targetGraphs": [
         "net10.0"
