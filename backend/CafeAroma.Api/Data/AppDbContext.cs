@@ -10,6 +10,7 @@ namespace CafeAroma.Api.Data
         }
 
              public DbSet<Usuario> Usuarios { get; set; }
+             public DbSet<HistoricoPrecio> HistoricosPrecio { get; set; }
 
             protected override void OnModelCreating(ModelBuilder modelBuilder)
 {
@@ -19,6 +20,14 @@ namespace CafeAroma.Api.Data
             modelBuilder.Entity<Usuario>().Property(u => u.Rol).HasColumnName("rol");
             modelBuilder.Entity<Usuario>().Property(u => u.ContrasenaHash).HasColumnName("contrasena_hash");
             modelBuilder.Entity<Usuario>().Property(u => u.Estado).HasColumnName("estado");
+
+            modelBuilder.Entity<HistoricoPrecio>().ToTable("historico_precio");
+modelBuilder.Entity<HistoricoPrecio>().Property(h => h.HistoricoPrecioId).HasColumnName("historico_precio_id");
+modelBuilder.Entity<HistoricoPrecio>().Property(h => h.ProductoId).HasColumnName("producto_id");
+modelBuilder.Entity<HistoricoPrecio>().Property(h => h.PrecioAnterior).HasColumnName("precio_anterior");
+modelBuilder.Entity<HistoricoPrecio>().Property(h => h.PrecioNuevo).HasColumnName("precio_nuevo");
+modelBuilder.Entity<HistoricoPrecio>().Property(h => h.UsuarioId).HasColumnName("usuario_id");
+modelBuilder.Entity<HistoricoPrecio>().Property(h => h.Fecha).HasColumnName("fecha");
 }
 
    
