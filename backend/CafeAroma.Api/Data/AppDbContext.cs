@@ -11,6 +11,7 @@ namespace CafeAroma.Api.Data
 
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<HistoricoPrecio> HistoricosPrecio { get; set; }
+        public DbSet<Insumo> Insumos { get; set; }
         public DbSet<ProductoInsumo> ProductoInsumos { get; set; }
         public DbSet<MovimientoInventario> MovimientosInventario { get; set; }
         public DbSet<AlertaStock> AlertasStock { get; set; }
