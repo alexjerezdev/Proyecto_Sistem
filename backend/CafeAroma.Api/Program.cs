@@ -4,40 +4,39 @@ using CafeAroma.Api.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Configuración limpia de la base de datos usando el tipo explícito de opciones
+// Configuración de la base de datos PostgreSQL
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddOpenApi();
+builder.Services.AddControllers();
 
 var app = builder.Build();
 
-// === PRUEBA DE CONEXIÓN RÁPIDA A POSTGRESQL (Segura contra errores de tipo) ===
+// === PRUEBA DE CONEXIÓN CON DETALLE DE ERROR ===
 using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
     try
     {
         var dbContext = ActivatorUtilities.CreateInstance<AppDbContext>(services);
-        var canConnect = dbContext.Database.CanConnect();
         
-        if (canConnect)
-        {
-            Console.WriteLine("--------------------------------------------------");
-            Console.WriteLine(" ¡CONEXIÓN EXITOSA A POSTGRESQL!");
-            Console.WriteLine("--------------------------------------------------");
-        }
-        else
-        {
-            Console.WriteLine("❌ No se pudo conectar a la base de datos.");
-        }
+        // Intentar abrir la conexión explícitamente para capturar el error exacto si lo hay
+        dbContext.Database.OpenConnection();
+        dbContext.Database.CloseConnection();
+
+        Console.WriteLine("--------------------------------------------------");
+        Console.WriteLine(" ¡CONEXIÓN EXITOSA A POSTGRESQL!");
+        Console.WriteLine("--------------------------------------------------");
     }
     catch (Exception ex)
     {
-        Console.WriteLine($"❌ Error al conectar a la base de datos: {ex.Message}");
+        Console.WriteLine("--------------------------------------------------");
+        Console.WriteLine($"❌ ERROR DE CONEXIÓN DETALLADO: {ex.Message}");
+        Console.WriteLine("--------------------------------------------------");
     }
 }
-// ===========================================================================
+// ===============================================
 
 if (app.Environment.IsDevelopment())
 {
@@ -45,6 +44,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.MapControllers();
 
 var summaries = new[]
 {
