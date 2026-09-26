@@ -1,0 +1,43 @@
+@{
+    ViewData["Title"] = "Checklist Diario de Inventario";
+}
+
+<div class="container mt-4">
+    <h2>Checklist Diario de Inventario</h2>
+    <form id="form-checklist">
+        <div class="mb-3 w-25">
+            <label class="form-label">Fecha:</label>
+            <input type="date" id="fecha" class="form-control" required />
+        </div>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Producto</th>
+                    <th>Cant. Inicial</th>
+                    <th>Cant. Final</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Café en Grano (Kg)</td>
+                    <td><input type="number" class="form-control" value="10" /></td>
+                    <td><input type="number" class="form-control" value="8" /></td>
+                </tr>
+                <tr>
+                    <td>Leche Entera (L)</td>
+                    <td><input type="number" class="form-control" value="20" /></td>
+                    <td><input type="number" class="form-control" value="15" /></td>
+                </tr>
+            </tbody>
+        </table>
+        <button type="submit" class="btn btn-primary">Guardar Checklist</button>
+    </form>
+</div>
+
+<script>
+    document.getElementById('fecha').valueAsDate = new Date();
+    document.getElementById('form-checklist').addEventListener('submit', (e) => {
+        e.preventDefault();
+        alert('Checklist registrado con éxito');
+    });
+</script>

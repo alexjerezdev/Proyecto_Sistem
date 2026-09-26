@@ -1,0 +1,26 @@
+@{
+    ViewData["Title"] = "Pantalla de Cocina";
+}
+
+<div class="container mt-4">
+    <h2>Notas de Pedidos - Cocina</h2>
+    <div class="row mt-3">
+        <div class="col-md-4">
+            <div class="card border-primary mb-3">
+                <div class="card-header fw-bold">Pedido #101</div>
+                <div class="card-body">
+                    <p>1x Capuccino<br/>1x Pastel de Avena</p>
+                    <p>Estado: <span class="badge bg-warning text-dark" id="estado-101">Pendiente</span></p>
+                    <button class="btn btn-sm btn-info" onclick="cambiarEstado('101', 'En Preparación')">En Preparación</button>
+                    <button class="btn btn-sm btn-success" onclick="cambiarEstado('101', 'Entregado')">Entregado</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function cambiarEstado(id, nuevoEstado) {
+        document.getElementById('estado-' + id).innerText = nuevoEstado;
+    }
+</script>
