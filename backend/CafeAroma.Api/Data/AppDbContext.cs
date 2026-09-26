@@ -1,5 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using CafeAroma.Api.Models;
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/feature/backend-bd
 namespace CafeAroma.Api.Data
 {
     public class AppDbContext : DbContext
@@ -9,6 +13,7 @@ namespace CafeAroma.Api.Data
             
         }
 
+<<<<<<< HEAD
              public DbSet<Usuario> Usuarios { get; set; }
              public DbSet<HistoricoPrecio> HistoricosPrecio { get; set; }
 
@@ -31,5 +36,19 @@ modelBuilder.Entity<HistoricoPrecio>().Property(h => h.Fecha).HasColumnName("fec
 }
 
    
+=======
+        public DbSet<Insumo> Insumos { get; set; }
+        public DbSet<ProductoInsumo> ProductoInsumos { get; set; }
+        public DbSet<MovimientoInventario> MovimientosInventario { get; set; }
+        public DbSet<AlertaStock> AlertasStock { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<ProductoInsumo>()
+                .HasKey(pi => new { pi.ProductoId, pi.InsumoId });
+        }
+>>>>>>> origin/feature/backend-bd
     }
 }
