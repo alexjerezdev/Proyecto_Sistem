@@ -7,18 +7,11 @@ using CafeAroma.Api.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
-<<<<<<< HEAD
-// === TODO builder.Services.Add... va ANTES de Build() ===
-
-=======
 // Configuración de la base de datos PostgreSQL
->>>>>>> origin/feature/backend-bd
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddOpenApi();
-builder.Services.AddControllers();
-
 builder.Services.AddControllers();
 
 builder.Services.AddScoped<TokenService>();
@@ -40,11 +33,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 
 builder.Services.AddAuthorization();
 
-// === Línea divisoria ===
 var app = builder.Build();
-
-<<<<<<< HEAD
-// === TODO app.Use... y app.Map... va DESPUÉS de Build() ===
 
 if (app.Environment.IsDevelopment())
 {
@@ -59,15 +48,11 @@ app.UseAuthorization();
 app.MapControllers();
 
 // === PRUEBA DE CONEXIÓN RÁPIDA A POSTGRESQL ===
-=======
-// === PRUEBA DE CONEXIÓN CON DETALLE DE ERROR ===
->>>>>>> origin/feature/backend-bd
 using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
     try
     {
-<<<<<<< HEAD
         var dbContext = services.GetRequiredService<AppDbContext>();
         var canConnect = dbContext.Database.CanConnect();
 
@@ -81,17 +66,6 @@ using (var scope = app.Services.CreateScope())
         {
             Console.WriteLine("❌ No se pudo conectar a la base de datos.");
         }
-=======
-        var dbContext = ActivatorUtilities.CreateInstance<AppDbContext>(services);
-        
-        // Intentar abrir la conexión explícitamente para capturar el error exacto si lo hay
-        dbContext.Database.OpenConnection();
-        dbContext.Database.CloseConnection();
-
-        Console.WriteLine("--------------------------------------------------");
-        Console.WriteLine(" ¡CONEXIÓN EXITOSA A POSTGRESQL!");
-        Console.WriteLine("--------------------------------------------------");
->>>>>>> origin/feature/backend-bd
     }
     catch (Exception ex)
     {
@@ -102,17 +76,6 @@ using (var scope = app.Services.CreateScope())
 }
 // ===============================================
 
-<<<<<<< HEAD
-=======
-if (app.Environment.IsDevelopment())
-{
-    app.MapOpenApi();
-}
-
-app.UseHttpsRedirection();
-app.MapControllers();
-
->>>>>>> origin/feature/backend-bd
 var summaries = new[]
 {
     "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
