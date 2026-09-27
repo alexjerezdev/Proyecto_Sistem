@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("luisfrontend")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+306d8c83c4a519862c744644cdb4639e14bca8d3")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8f992b39bdbb26ce531bf50d223e2e4cc6c68883")]
 [assembly: System.Reflection.AssemblyProductAttribute("luisfrontend")]
 [assembly: System.Reflection.AssemblyTitleAttribute("luisfrontend")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

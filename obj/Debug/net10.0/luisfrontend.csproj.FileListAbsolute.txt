@@ -109,10 +109,7 @@ C:\adv\materias\sistema de informacion 1\luisfrontend\obj\Debug\net10.0\luisfron
 C:\adv\materias\sistema de informacion 1\luisfrontend\obj\Debug\net10.0\rjimswa.dswa.cache.json
 C:\adv\materias\sistema de informacion 1\luisfrontend\obj\Debug\net10.0\rjsmrazor.dswa.cache.json
 C:\adv\materias\sistema de informacion 1\luisfrontend\obj\Debug\net10.0\rjsmcshtml.dswa.cache.json
-C:\adv\materias\sistema de informacion 1\luisfrontend\obj\Debug\net10.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
 C:\adv\materias\sistema de informacion 1\luisfrontend\obj\Debug\net10.0\scopedcss\bundle\luisfrontend.styles.css
-C:\adv\materias\sistema de informacion 1\luisfrontend\obj\Debug\net10.0\scopedcss\projectbundle\luisfrontend.bundle.scp.css
-C:\adv\materias\sistema de informacion 1\luisfrontend\obj\Debug\net10.0\compressed\f53euh7f4d-{0}-b9sayid5wm-b9sayid5wm.gz
 C:\adv\materias\sistema de informacion 1\luisfrontend\obj\Debug\net10.0\compressed\4gsfi9tx3x-{0}-61n19gt1b8-61n19gt1b8.gz
 C:\adv\materias\sistema de informacion 1\luisfrontend\obj\Debug\net10.0\compressed\63hvua5y8n-{0}-xtxxf3hu2r-xtxxf3hu2r.gz
 C:\adv\materias\sistema de informacion 1\luisfrontend\obj\Debug\net10.0\compressed\37aqssuoz2-{0}-t1cqhe9u97-t1cqhe9u97.gz
@@ -174,8 +171,6 @@ C:\adv\materias\sistema de informacion 1\luisfrontend\obj\Debug\net10.0\compress
 C:\adv\materias\sistema de informacion 1\luisfrontend\obj\Debug\net10.0\compressed\voakd01pvi-{0}-9vr69e8ynj-9vr69e8ynj.gz
 C:\adv\materias\sistema de informacion 1\luisfrontend\obj\Debug\net10.0\compressed\cpvc4v66ax-{0}-87fc7y1x7t-87fc7y1x7t.gz
 C:\adv\materias\sistema de informacion 1\luisfrontend\obj\Debug\net10.0\compressed\n131ao108o-{0}-mlv21k5csn-mlv21k5csn.gz
-C:\adv\materias\sistema de informacion 1\luisfrontend\obj\Debug\net10.0\compressed\q3wegz3ko1-{0}-25l8j1xxls-25l8j1xxls.gz
-C:\adv\materias\sistema de informacion 1\luisfrontend\obj\Debug\net10.0\compressed\pe4u3qzee5-{0}-25l8j1xxls-25l8j1xxls.gz
 C:\adv\materias\sistema de informacion 1\luisfrontend\obj\Debug\net10.0\staticwebassets.build.json
 C:\adv\materias\sistema de informacion 1\luisfrontend\obj\Debug\net10.0\staticwebassets.build.json.cache
 C:\adv\materias\sistema de informacion 1\luisfrontend\obj\Debug\net10.0\staticwebassets.development.json
@@ -187,3 +182,4 @@ C:\adv\materias\sistema de informacion 1\luisfrontend\obj\Debug\net10.0\refint\l
 C:\adv\materias\sistema de informacion 1\luisfrontend\obj\Debug\net10.0\luisfrontend.pdb
 C:\adv\materias\sistema de informacion 1\luisfrontend\obj\Debug\net10.0\luisfrontend.genruntimeconfig.cache
 C:\adv\materias\sistema de informacion 1\luisfrontend\obj\Debug\net10.0\ref\luisfrontend.dll
+C:\adv\materias\sistema de informacion 1\luisfrontend\obj\Debug\net10.0\compressed\f53euh7f4d-{0}-e15h1dirs9-e15h1dirs9.gz
