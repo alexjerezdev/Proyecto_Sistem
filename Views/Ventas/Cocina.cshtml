@@ -1,0 +1,54 @@
+@{
+    ViewData["Title"] = "Pantalla de Cocina - Café Aroma";
+}
+
+<div class="reports-container">
+    <header class="section-header">
+        <h2>👨‍🍳 Comandero de Cocina</h2>
+        <p>Notas de pedidos en tiempo real y actualización de estado.</p>
+    </header>
+
+    <div class="kitchen-grid">
+        <!-- Tarjeta Pedido 1 -->
+        <div class="kitchen-card border-pending">
+            <div class="kitchen-card-header">
+                <strong>Pedido #1024</strong>
+                <span class="status-badge pending">Pendiente</span>
+            </div>
+            <ul class="kitchen-items">
+                <li>2x Café Americano</li>
+                <li>1x Croissant</li>
+            </ul>
+            <div class="kitchen-actions">
+                <button onclick="cambiarEstado(1024, 'Preparacion')" class="btn-action prep">En Preparación</button>
+                <button onclick="cambiarEstado(1024, 'Entregado')" class="btn-action done">Entregado</button>
+            </div>
+        </div>
+
+        <!-- Tarjeta Pedido 2 -->
+        <div class="kitchen-card border-prep">
+            <div class="kitchen-card-header">
+                <strong>Pedido #1023</strong>
+                <span class="status-badge prep">En Preparación</span>
+            </div>
+            <ul class="kitchen-items">
+                <li>1x Capuccino (Poca Azúcar)</li>
+                <li>1x Pastel de Chocolate</li>
+            </ul>
+            <div class="kitchen-actions">
+                <button onclick="cambiarEstado(1023, 'Entregado')" class="btn-action done">Marcar Entregado</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function cambiarEstado(pedidoId, nuevoEstado) {
+        fetch(`/Ventas/CambiarEstadoNota?id=${pedidoId}&nuevoEstado=${nuevoEstado}`, { method: 'PATCH' })
+            .then(res => res.json())
+            .then(data => {
+                alert(data.mensaje);
+                location.reload();
+            });
+    }
+</script>

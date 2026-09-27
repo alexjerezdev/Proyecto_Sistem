@@ -1,6 +1,14 @@
+using Microsoft.EntityFrameworkCore;
+using Npgsql.EntityFrameworkCore.PostgreSQL;
+using luisfrontend.Models;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// 1. Configuración del DbContext con PostgreSQL
+builder.Services.AddDbContext<luisfrontend.Models.Data.CafeDbContext>(options =>
+    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+// Agregar servicios de controladores con vistas
 builder.Services.AddControllersWithViews();
 
 // === Conexión con el backend (CafeAroma.Api) ===
@@ -12,24 +20,22 @@ builder.Services.AddHttpClient("CafeAromaApi", client =>
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+// Configurar el pipeline HTTP
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
 app.UseHttpsRedirection();
+app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
 
-app.MapStaticAssets();
-
+// Ruta principal apuntando a Ventas
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}")
-    .WithStaticAssets();
+    pattern: "{controller=Ventas}/{action=Index}/{id?}");
 
 app.Run();

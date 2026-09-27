@@ -1,0 +1,77 @@
+@{
+    ViewData["Title"] = "Más Vendidos e Históricos - Café Aroma";
+    string periodo = ViewBag.Periodo ?? "dia";
+}
+
+<div class="reports-container">
+    <header class="section-header">
+        <h2>📊 Reporte: Productos Más Vendidos</h2>
+        <p>Ranking e histórico de ventas filtrado por período de tiempo.</p>
+    </header>
+
+    <!-- FILTRO DE PERÍODO (PC-151) -->
+    <div class="filter-card">
+        <span class="filter-label">📅 Seleccionar Período:</span>
+        <div class="period-buttons">
+            <a href="/Ventas/MasVendidos?periodo=dia" class="btn-filter @(periodo == "dia" ? "active" : "")">Hoy (Día)</a>
+            <a href="/Ventas/MasVendidos?periodo=semana" class="btn-filter @(periodo == "semana" ? "active" : "")">Esta Semana</a>
+            <a href="/Ventas/MasVendidos?periodo=mes" class="btn-filter @(periodo == "mes" ? "active" : "")">Este Mes</a>
+        </div>
+    </div>
+
+    <div class="metrics-grid">
+        <div class="metric-card">
+            <span class="metric-title">Período Consultado</span>
+            <strong class="metric-value" style="text-transform: capitalize;">@periodo</strong>
+        </div>
+        <div class="metric-card">
+            <span class="metric-title">Total Unidades Vendidas</span>
+            <strong class="metric-value">@(periodo == "dia" ? "145" : periodo == "semana" ? "890" : "3,450")</strong>
+        </div>
+        <div class="metric-card">
+            <span class="metric-title">Ingresos Totales</span>
+            <strong class="metric-value">@(periodo == "dia" ? "$1,740.00" : periodo == "semana" ? "$10,680.00" : "$41,400.00")</strong>
+        </div>
+    </div>
+
+    <div class="table-card">
+        <table class="report-table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Producto</th>
+                    <th>Categoría</th>
+                    <th>Precio Unit.</th>
+                    <th>Cant. Vendida</th>
+                    <th>Total Recaudado</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><span class="badge top-1">1</span></td>
+                    <td><strong>☕ Café Americano</strong></td>
+                    <td>Bebidas Calientes</td>
+                    <td>$12.00</td>
+                    <td>@(periodo == "dia" ? "50" : "320")</td>
+                    <td>$@(periodo == "dia" ? "600.00" : "3,840.00")</td>
+                </tr>
+                <tr>
+                    <td><span class="badge top-2">2</span></td>
+                    <td><strong>🥛 Capuccino</strong></td>
+                    <td>Bebidas Calientes</td>
+                    <td>$16.00</td>
+                    <td>@(periodo == "dia" ? "35" : "210")</td>
+                    <td>$@(periodo == "dia" ? "560.00" : "3,360.00")</td>
+                </tr>
+                <tr>
+                    <td><span class="badge top-3">3</span></td>
+                    <td><strong>🍰 Pastel de Chocolate</strong></td>
+                    <td>Repostería</td>
+                    <td>$10.00</td>
+                    <td>@(periodo == "dia" ? "25" : "150")</td>
+                    <td>$@(periodo == "dia" ? "250.00" : "1,500.00")</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
