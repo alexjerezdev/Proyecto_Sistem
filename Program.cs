@@ -1,4 +1,11 @@
+using Microsoft.EntityFrameworkCore;
+using luisfrontend.Models;
+
 var builder = WebApplication.CreateBuilder(args);
+
+// 1. Configurar la conexión a PostgreSQL usando DefaultConnection de appsettings.json
+builder.Services.AddDbContext<CafeDbContext>(options =>
+    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -20,10 +27,10 @@ app.UseAuthorization();
 
 app.MapStaticAssets();
 
+// 2. CAMBIO AQUÍ: Se cambió "Home" por "Ventas" para que abra directamente el sistema de ventas
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}")
+    pattern: "{controller=Ventas}/{action=Index}/{id?}")
     .WithStaticAssets();
-
 
 app.Run();

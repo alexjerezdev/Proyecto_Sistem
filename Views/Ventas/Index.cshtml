@@ -2,62 +2,162 @@
     ViewData["Title"] = "Punto de Venta (POS)";
 }
 
-<div class="container mt-4">
-    <h2>Punto de Venta</h2>
-    <div class="row mt-3">
-        <div class="col-md-7">
-            <h4>Catálogo de Productos</h4>
-            <div class="d-flex gap-2">
-                <button class="btn btn-outline-primary" onclick="agregar('Café Americano', 12.00)">+ Café Americano ($12.00)</button>
-                <button class="btn btn-outline-primary" onclick="agregar('Capuccino', 16.00)">+ Capuccino ($16.00)</button>
-                <button class="btn btn-outline-primary" onclick="agregar('Pastel de Avena', 10.00)">+ Pastel ($10.00)</button>
+<div class="row g-4">
+    <!-- Catálogo de Productos -->
+    <div class="col-lg-7">
+        <div class="card shadow-sm border-0">
+            <div class="card-header bg-white py-3">
+                <h4 class="card-title mb-0 fw-bold text-primary"><i class="bi bi-cup-hot me-2"></i>Catálogo de Productos</h4>
+            </div>
+            <div class="card-body">
+                <div class="row row-cols-1 row-cols-md-2 g-3">
+                    <!-- Producto 1 -->
+                    <div class="col">
+                        <div class="card h-100 border text-center p-2">
+                            <div class="display-6 my-2">☕</div>
+                            <h5 class="card-title fw-semibold">Café Americano</h5>
+                            <p class="text-success fw-bold fs-5 mb-2">$12.00</p>
+                            <button class="btn btn-primary btn-sm w-100" onclick="agregarAlCarrito('Café Americano', 12.00)">
+                                <i class="bi bi-plus-circle me-1"></i> Agregar
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Producto 2 -->
+                    <div class="col">
+                        <div class="card h-100 border text-center p-2">
+                            <div class="display-6 my-2">🥛</div>
+                            <h5 class="card-title fw-semibold">Capuccino</h5>
+                            <p class="text-success fw-bold fs-5 mb-2">$16.00</p>
+                            <button class="btn btn-primary btn-sm w-100" onclick="agregarAlCarrito('Capuccino', 16.00)">
+                                <i class="bi bi-plus-circle me-1"></i> Agregar
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Producto 3 -->
+                    <div class="col">
+                        <div class="card h-100 border text-center p-2">
+                            <div class="display-6 my-2">🍰</div>
+                            <h5 class="card-title fw-semibold">Pastel de Chocolate</h5>
+                            <p class="text-success fw-bold fs-5 mb-2">$10.00</p>
+                            <button class="btn btn-primary btn-sm w-100" onclick="agregarAlCarrito('Pastel de Chocolate', 10.00)">
+                                <i class="bi bi-plus-circle me-1"></i> Agregar
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Producto 4 -->
+                    <div class="col">
+                        <div class="card h-100 border text-center p-2">
+                            <div class="display-6 my-2">🥐</div>
+                            <h5 class="card-title fw-semibold">Croissant</h5>
+                            <p class="text-success fw-bold fs-5 mb-2">$8.50</p>
+                            <button class="btn btn-primary btn-sm w-100" onclick="agregarAlCarrito('Croissant', 8.50)">
+                                <i class="bi bi-plus-circle me-1"></i> Agregar
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="col-md-5">
-            <h4>Detalle de la Venta</h4>
-            <ul id="lista-carrito" class="list-group mb-3"></ul>
-            <h5>Total: $<span id="total">0.00</span></h5>
+    </div>
 
-            <div class="mb-3">
-                <label>Medio de Pago:</label>
-                <select id="medio-pago" class="form-select">
-                    <option value="Efectivo">Efectivo</option>
-                    <option value="QR">QR</option>
-                    <option value="Transferencia">Transferencia</option>
-                </select>
+    <!-- Detalle de Venta / Carrito -->
+    <div class="col-lg-5">
+        <div class="card shadow-sm border-0">
+            <div class="card-header bg-white py-3">
+                <h4 class="card-title mb-0 fw-bold text-dark"><i class="bi bi-receipt me-2"></i>Resumen de Venta</h4>
             </div>
+            <div class="card-body">
+                <table class="table table-hover align-middle">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Producto</th>
+                            <th class="text-center">Cant.</th>
+                            <th class="text-end">Subtotal</th>
+                        </tr>
+                    </thead>
+                    <tbody id="lista-carrito">
+                        <tr id="empty-row">
+                            <td colspan="3" class="text-center text-muted py-4">No hay productos seleccionados</td>
+                        </tr>
+                    </tbody>
+                </table>
 
-            <button class="btn btn-success w-100" onclick="confirmarVenta()">Confirmar Venta</button>
+                <hr />
+
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <span class="fs-5 fw-bold">Total a Pagar:</span>
+                    <span class="fs-4 fw-bold text-primary" id="total-monto">$0.00</span>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">Medio de Pago:</label>
+                    <select id="medio-pago" class="form-select">
+                        <option value="Efectivo">Efectivo</option>
+                        <option value="Transferencia">Transferencia</option>
+                        <option value="QR">Código QR</option>
+                    </select>
+                </div>
+
+                <button class="btn btn-success w-100 py-2 fw-bold fs-6" onclick="confirmarVenta()">
+                    <i class="bi bi-check-circle-fill me-1"></i> Confirmar Venta
+                </button>
+            </div>
         </div>
     </div>
 </div>
 
+@section Scripts {
 <script>
     let carrito = [];
 
-    function agregar(nombre, precio) {
-        carrito.push({ nombre, precio });
-        actualizar();
+    function agregarAlCarrito(nombre, precio) {
+        let item = carrito.find(p => p.nombre === nombre);
+        if (item) {
+            item.cantidad++;
+        } else {
+            carrito.push({ nombre: nombre, precio: precio, cantidad: 1 });
+        }
+        renderizarCarrito();
     }
 
-    function actualizar() {
-        const lista = document.getElementById('lista-carrito');
+    function renderizarCarrito() {
+        let tbody = document.getElementById("lista-carrito");
+        tbody.innerHTML = "";
         let total = 0;
-        lista.innerHTML = '';
-        carrito.forEach((item) => {
-            total += item.precio;
-            lista.innerHTML += `<li class="list-group-item d-flex justify-content-between">${item.nombre} <span>$${item.precio.toFixed(2)}</span></li>`;
+
+        if (carrito.length === 0) {
+            tbody.innerHTML = `<tr id="empty-row"><td colspan="3" class="text-center text-muted py-4">No hay productos seleccionados</td></tr>`;
+            document.getElementById("total-monto").innerText = "$0.00";
+            return;
+        }
+
+        carrito.forEach(item => {
+            let subtotal = item.precio * item.cantidad;
+            total += subtotal;
+            tbody.innerHTML += `
+                <tr>
+                    <td>${item.nombre}</td>
+                    <td class="text-center">${item.cantidad}</td>
+                    <td class="text-end fw-semibold">$${subtotal.toFixed(2)}</td>
+                </tr>
+            `;
         });
-        document.getElementById('total').innerText = total.toFixed(2);
+
+        document.getElementById("total-monto").innerText = `$${total.toFixed(2)}`;
     }
 
     function confirmarVenta() {
         if (carrito.length === 0) {
-            alert('No se puede confirmar una venta sin productos');
+            alert("Selecciona al menos un producto.");
             return;
         }
-        alert('Venta procesada exitosamente con medio de pago: ' + document.getElementById('medio-pago').value);
+
+        alert("¡Venta confirmada exitosamente! Se envió la nota a Cocina.");
         carrito = [];
-        actualizar();
+        renderizarCarrito();
     }
 </script>
+}

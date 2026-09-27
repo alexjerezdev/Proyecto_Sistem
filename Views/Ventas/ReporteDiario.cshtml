@@ -1,0 +1,25 @@
+@{
+    ViewData["Title"] = "Reporte Diario - Café Aroma";
+}
+
+<div class="reports-container">
+    <header class="section-header">
+        <h2>📑 Reporte Diario de Operaciones</h2>
+        <p>Consolidado de ventas e inventario al día de hoy (@ViewBag.FechaActual).</p>
+    </header>
+
+    <div class="metrics-grid">
+        <div class="metric-card">
+            <span class="metric-title">Ventas del Día</span>
+            <strong class="metric-value">$2,450.00</strong>
+        </div>
+        <div class="metric-card">
+            <span class="metric-title">Transacciones</span>
+            <strong class="metric-value">38 Tickets</strong>
+        </div>
+        <div class="metric-card">
+            <span class="metric-title">Efectivo en Caja</span>
+            <strong class="metric-value">$1,800.00</strong>
+        </div>
+    </div>
+</div>
