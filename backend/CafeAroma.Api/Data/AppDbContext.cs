@@ -8,6 +8,7 @@ namespace CafeAroma.Api.Data
         public AppDbContext(DbContextOptions options) : base(options)
         {
         }
+        public DbSet<CierreCaja> CierresCaja { get; set; } 
 
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<HistoricoPrecio> HistoricosPrecio { get; set; }
