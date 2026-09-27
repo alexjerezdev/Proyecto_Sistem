@@ -1,0 +1,63 @@
+@{
+    ViewData["Title"] = "Punto de Venta (POS)";
+}
+
+<div class="container mt-4">
+    <h2>Punto de Venta</h2>
+    <div class="row mt-3">
+        <div class="col-md-7">
+            <h4>Catálogo de Productos</h4>
+            <div class="d-flex gap-2">
+                <button class="btn btn-outline-primary" onclick="agregar('Café Americano', 12.00)">+ Café Americano ($12.00)</button>
+                <button class="btn btn-outline-primary" onclick="agregar('Capuccino', 16.00)">+ Capuccino ($16.00)</button>
+                <button class="btn btn-outline-primary" onclick="agregar('Pastel de Avena', 10.00)">+ Pastel ($10.00)</button>
+            </div>
+        </div>
+        <div class="col-md-5">
+            <h4>Detalle de la Venta</h4>
+            <ul id="lista-carrito" class="list-group mb-3"></ul>
+            <h5>Total: $<span id="total">0.00</span></h5>
+
+            <div class="mb-3">
+                <label>Medio de Pago:</label>
+                <select id="medio-pago" class="form-select">
+                    <option value="Efectivo">Efectivo</option>
+                    <option value="QR">QR</option>
+                    <option value="Transferencia">Transferencia</option>
+                </select>
+            </div>
+
+            <button class="btn btn-success w-100" onclick="confirmarVenta()">Confirmar Venta</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    let carrito = [];
+
+    function agregar(nombre, precio) {
+        carrito.push({ nombre, precio });
+        actualizar();
+    }
+
+    function actualizar() {
+        const lista = document.getElementById('lista-carrito');
+        let total = 0;
+        lista.innerHTML = '';
+        carrito.forEach((item) => {
+            total += item.precio;
+            lista.innerHTML += `<li class="list-group-item d-flex justify-content-between">${item.nombre} <span>$${item.precio.toFixed(2)}</span></li>`;
+        });
+        document.getElementById('total').innerText = total.toFixed(2);
+    }
+
+    function confirmarVenta() {
+        if (carrito.length === 0) {
+            alert('No se puede confirmar una venta sin productos');
+            return;
+        }
+        alert('Venta procesada exitosamente con medio de pago: ' + document.getElementById('medio-pago').value);
+        carrito = [];
+        actualizar();
+    }
+</script>
