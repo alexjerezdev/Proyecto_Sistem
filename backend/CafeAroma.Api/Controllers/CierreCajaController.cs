@@ -17,8 +17,7 @@ namespace CafeAroma.Api.Controllers
         }
 
         // GET: api/CierreCaja/resumen-dia
-        // HU-21 Resumen: muestra cuanto se ha vendido HOY antes de cerrar caja,
-        // para que la encargada/dueno vea el numero antes de contar el efectivo.
+        // HU-21 Resumen: cuanto se ha vendido HOY antes de cerrar caja.
         [HttpGet("resumen-dia")]
         public async Task<ActionResult<object>> GetResumenDia()
         {
@@ -27,8 +26,8 @@ namespace CafeAroma.Api.Controllers
         }
 
         // POST: api/CierreCaja
-        // HU-20 Cierre: registra el cierre de caja del dia, comparando
-        // el total de ventas del sistema contra el efectivo contado a mano.
+        // HU-20 Cierre: compara el total de ventas del sistema contra el efectivo contado.
+        // Ademas deja constancia en la bitacora (HU-26).
         [HttpPost]
         public async Task<ActionResult<CierreCaja>> CerrarCaja(CierreCajaRequest request)
         {
@@ -46,25 +45,54 @@ namespace CafeAroma.Api.Controllers
             _context.CierresCaja.Add(cierre);
             await _context.SaveChangesAsync();
 
-            // Volvemos a leer el registro para traer "diferencia",
-            // que la calculo Postgres solo (columna generada).
+            // Traemos de vuelta "diferencia", que la calcula Postgres (columna generada).
             await _context.Entry(cierre).ReloadAsync();
+
+            _context.Bitacoras.Add(new Bitacora
+            {
+                UsuarioId = request.UsuarioId,
+                Accion = "CIERRE_CAJA",
+                EntidadAfectada = "cierre_caja",
+                EntidadId = cierre.CierreCajaId,
+                Detalle = $"Total ventas: {cierre.TotalVentas}, efectivo contado: {cierre.EfectivoContado}, diferencia: {cierre.Diferencia}",
+                FechaHora = DateTime.UtcNow
+            });
+            await _context.SaveChangesAsync();
 
             return CreatedAtAction(nameof(GetCierre), new { id = cierre.CierreCajaId }, cierre);
         }
 
         // GET: api/CierreCaja
-        // HU-22 (bonus): historial de todos los cierres realizados
+        // GET: api/CierreCaja?desde=2026-09-01&hasta=2026-09-30&usuarioId=1&soloConDiferencia=true
+        // HU-22 Historial: todos los cierres, del mas reciente al mas antiguo, con filtros opcionales.
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<CierreCaja>>> GetHistorial()
+        public async Task<ActionResult<IEnumerable<CierreCaja>>> GetHistorial(
+            [FromQuery] DateOnly? desde,
+            [FromQuery] DateOnly? hasta,
+            [FromQuery] int? usuarioId,
+            [FromQuery] bool soloConDiferencia = false)
         {
-            return await _context.CierresCaja
+            var consulta = _context.CierresCaja.AsQueryable();
+
+            if (desde.HasValue)
+                consulta = consulta.Where(c => c.Fecha >= desde.Value);
+
+            if (hasta.HasValue)
+                consulta = consulta.Where(c => c.Fecha <= hasta.Value);
+
+            if (usuarioId.HasValue)
+                consulta = consulta.Where(c => c.UsuarioId == usuarioId.Value);
+
+            // Util para que el dueno revise solo los cierres donde no cuadro la caja
+            if (soloConDiferencia)
+                consulta = consulta.Where(c => c.Diferencia != 0);
+
+            return await consulta
                 .OrderByDescending(c => c.FechaHora)
                 .ToListAsync();
         }
 
         // GET: api/CierreCaja/5
-        // Detalle/resumen de un cierre puntual
         [HttpGet("{id}")]
         public async Task<ActionResult<CierreCaja>> GetCierre(int id)
         {
@@ -73,9 +101,8 @@ namespace CafeAroma.Api.Controllers
             return cierre;
         }
 
-        // Suma el total de las ventas registradas hoy, consultando
-        // directamente la tabla "venta" (no hace falta un modelo Venta
-        // aparte solo para esta suma).
+        // Suma las ventas de hoy consultando directamente la tabla "venta"
+        // (asi no dependemos del modelo Venta del modulo de ventas).
         private async Task<decimal> ObtenerTotalVentasDeHoyAsync()
         {
             var connection = _context.Database.GetDbConnection();
