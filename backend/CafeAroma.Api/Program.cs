@@ -16,6 +16,18 @@ builder.Services.AddControllers();
 
 builder.Services.AddScoped<TokenService>();
 
+// === CORS: permitir que el frontend consuma esta API ===
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("PermitirFrontend", policy =>
+    {
+        policy.WithOrigins("http://localhost:5044", "https://localhost:5044")
+              .AllowAnyHeader()
+              .AllowAnyMethod();
+    });
+});
+// ========================================================
+
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
@@ -41,6 +53,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors("PermitirFrontend");
 
 app.UseAuthentication();
 app.UseAuthorization();

@@ -3,6 +3,13 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+// === Conexión con el backend (CafeAroma.Api) ===
+builder.Services.AddHttpClient("CafeAromaApi", client =>
+{
+    client.BaseAddress = new Uri(builder.Configuration["ApiBaseUrl"]!);
+});
+// ================================================
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -24,6 +31,5 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}")
     .WithStaticAssets();
-
 
 app.Run();

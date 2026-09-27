@@ -4,6 +4,14 @@
     <TargetFramework>net10.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <UseAppHost>false</UseAppHost>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="backend/**/*.cs" />
+    <Content Remove="backend/**/*" />
+    <None Remove="backend/**/*" />
+    <EmbeddedResource Remove="backend/**/*" />
+  </ItemGroup>
 
 </Project>
