@@ -1,3 +1,20 @@
+
 ﻿@"
 bin/
 obj/
+
+# Carpetas de compilación .NET
+bin/
+obj/
+
+# Archivos de usuario de Visual Studio
+*.user
+*.suo
+.vs/
+
+# Configuración local sensible (opcional, si no quieren subir contraseñas)
+# appsettings.Development.json
+
+# Node/frontend (si aplica)
+node_modules/
+
