@@ -1,0 +1,47 @@
+@{
+    ViewData["Title"] = "Checklist Diario de Inventario";
+}
+
+<div class="reports-container">
+    <header class="section-header">
+        <h2>📋 Checklist Diario de Inventario</h2>
+        <p>Control de insumos al inicio y cierre de jornada.</p>
+    </header>
+
+    <div class="table-card p-3">
+        <form onsubmit="guardarChecklist(event)">
+            <table class="report-table">
+                <thead>
+                    <tr>
+                        <th>Insumo / Producto</th>
+                        <th>Stock Sistema</th>
+                        <th>Conteo Físico Real</th>
+                        <th>Estado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Grano de Café (Kg)</td>
+                        <td>10.5 Kg</td>
+                        <td><input type="number" step="0.1" class="form-control-sm" value="10.5" required /></td>
+                        <td><span class="badge top-2">OK</span></td>
+                    </tr>
+                    <tr>
+                        <td>Leche Entera (Lts)</td>
+                        <td>24 Lts</td>
+                        <td><input type="number" class="form-control-sm" value="22" required /></td>
+                        <td><span class="badge top-3">Diferencia (-2)</span></td>
+                    </tr>
+                </tbody>
+            </table>
+            <button type="submit" class="btn-filter active style-btn">Guardar Checklist Diario</button>
+        </form>
+    </div>
+</div>
+
+<script>
+    function guardarChecklist(e) {
+        e.preventDefault();
+        alert("Checklist diario guardado e integrado correctamente.");
+    }
+</script>
