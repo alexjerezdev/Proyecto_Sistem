@@ -18,6 +18,9 @@ namespace CafeAroma.Api.Data
         public DbSet<MovimientoInventario> MovimientosInventario { get; set; }
         public DbSet<AlertaStock> AlertasStock { get; set; }
         public DbSet<Merma> Mermas => Set<Merma>();
+        
+        public DbSet<Checklist> Checklists => Set<Checklist>();
+public DbSet<ChecklistDetalle> ChecklistDetalles => Set<ChecklistDetalle>();
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
