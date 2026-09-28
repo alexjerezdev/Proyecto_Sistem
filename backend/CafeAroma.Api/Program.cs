@@ -7,16 +7,26 @@ using CafeAroma.Api.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// === TODO builder.Services.Add... va ANTES de Build() ===
-
+// Configuración de la base de datos PostgreSQL
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddOpenApi();
-
 builder.Services.AddControllers();
 
 builder.Services.AddScoped<TokenService>();
+
+// === CORS: permitir que el frontend consuma esta API ===
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("PermitirFrontend", policy =>
+    {
+        policy.WithOrigins("http://localhost:5044", "https://localhost:5044")
+              .AllowAnyHeader()
+              .AllowAnyMethod();
+    });
+});
+// ========================================================
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
@@ -35,10 +45,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 
 builder.Services.AddAuthorization();
 
-// === Línea divisoria ===
 var app = builder.Build();
-
-// === TODO app.Use... y app.Map... va DESPUÉS de Build() ===
 
 if (app.Environment.IsDevelopment())
 {
@@ -46,6 +53,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors("PermitirFrontend");
 
 app.UseAuthentication();
 app.UseAuthorization();
@@ -74,10 +83,12 @@ using (var scope = app.Services.CreateScope())
     }
     catch (Exception ex)
     {
-        Console.WriteLine($"❌ Error al conectar a la base de datos: {ex.Message}");
+        Console.WriteLine("--------------------------------------------------");
+        Console.WriteLine($"❌ ERROR DE CONEXIÓN DETALLADO: {ex.Message}");
+        Console.WriteLine("--------------------------------------------------");
     }
 }
-// ===========================================================================
+// ===============================================
 
 var summaries = new[]
 {

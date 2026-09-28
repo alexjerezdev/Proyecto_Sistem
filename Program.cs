@@ -11,6 +11,13 @@ builder.Services.AddDbContext<luisfrontend.Models.Data.CafeDbContext>(options =>
 // Agregar servicios de controladores con vistas
 builder.Services.AddControllersWithViews();
 
+// === Conexión con el backend (CafeAroma.Api) ===
+builder.Services.AddHttpClient("CafeAromaApi", client =>
+{
+    client.BaseAddress = new Uri(builder.Configuration["ApiBaseUrl"]!);
+});
+// ================================================
+
 var app = builder.Build();
 
 // Configurar el pipeline HTTP
