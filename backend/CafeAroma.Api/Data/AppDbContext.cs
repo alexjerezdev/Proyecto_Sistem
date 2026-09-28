@@ -17,7 +17,7 @@ namespace CafeAroma.Api.Data
         public DbSet<ProductoInsumo> ProductoInsumos { get; set; }
         public DbSet<MovimientoInventario> MovimientosInventario { get; set; }
         public DbSet<AlertaStock> AlertasStock { get; set; }
-
+        public DbSet<Merma> Mermas => Set<Merma>();
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
