@@ -8,14 +8,11 @@ namespace CafeAroma.Api.Data
         public AppDbContext(DbContextOptions options) : base(options)
         {
         }
-        public DbSet<Bitacora> Bitacoras { get; set; }
-        public DbSet<CierreCaja> CierresCaja { get; set; } 
-<<<<<<< HEAD
 
+        public DbSet<Bitacora> Bitacoras { get; set; }
+        public DbSet<CierreCaja> CierresCaja { get; set; }
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<HistoricoPrecio> HistoricosPrecio { get; set; }
-=======
->>>>>>> origin/feature/backend-bd
         public DbSet<Insumo> Insumos { get; set; }
         public DbSet<ProductoInsumo> ProductoInsumos { get; set; }
         public DbSet<MovimientoInventario> MovimientosInventario { get; set; }
