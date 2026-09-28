@@ -17,6 +17,7 @@
     </PackageReference>
     <PackageReference Include="Microsoft.OpenApi" Version="2.3.9" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="9.0.0" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.23.0" />
   </ItemGroup>
 
 </Project>
